@@ -28,7 +28,7 @@
     "package": "yarn package:clean && yarn package:pkg && yarn package:copy",
     "package:clean": "rimraf packaged",
     "package:copy": "cp -r builtins lib packaged && node scripts/package-ripgrep.js packaged",
-    "package:pkg": "pkg --public --public-packages \"*\" --no-bytecode -t node12 -c package.json -o packaged/blueprint.exe bundled/blueprint.js",
+    "package:pkg": "npx pkg --no-install --public --public-packages \"*\" --no-bytecode -t node12 -c package.json -o packaged/blueprint.exe bundled/blueprint.js",
     "prepare": "theia download:plugins",
     "rebuild": "theia rebuild:browser --cacheRoot ../.."
   },
