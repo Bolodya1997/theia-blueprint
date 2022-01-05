@@ -7,7 +7,7 @@ distFolder = "applications/electron/dist"
 
 pipeline {
     agent none
-    triggers { cron('@daily') }
+    // triggers { cron('@daily') }
     options {
         timeout(time: 5, unit: 'HOURS')
         disableConcurrentBuilds()
@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Build') {
             parallel {
-                stage('Test Linux Theia@Next') {
+                stage('Build and TestLinux Theia@Next') {
                     agent {
                         kubernetes {
                             yaml """
@@ -24,7 +24,7 @@ kind: Pod
 spec:
   containers:
   - name: theia-dev
-    image: eclipsetheia/theia-blueprint
+    image: jfaltermeier/theia-blueprint-build:latest
     command:
     - cat
     tty: true
@@ -59,7 +59,8 @@ spec:
                     steps {
                         container('theia-dev') {
                             script {
-                                buildNext(false)
+                                buildNext()
+                                testNext('linux')
                             }
                         }
                     }
@@ -69,13 +70,14 @@ spec:
                         }
                     }
                 }
-                stage('Test Mac Theia@Next') {
+                stage('Build and Test Mac Theia@Next') {
                     agent {
                         label 'macos'
                     }
                     steps {
                         script {
-                            buildNext(false)
+                            buildNext()
+                            testNext('mac')
                         }
                     }
                     post {
@@ -84,13 +86,14 @@ spec:
                         }
                     }
                 }
-                stage('Test Windows Theia@Next') {
+                stage('Build and Test Windows Theia@Next') {
                     agent {
                         label 'windows'
                     }
                     steps {
                         script {
-                            buildNext(true)
+                            buildNext()
+                            testNext('windows')
                         }
                     }
                     post {
@@ -118,7 +121,7 @@ spec:
     }
 }
 
-def buildNext(boolean runTests) {
+def buildNext() {
     int MAX_RETRY = 3
 
     checkout scm
@@ -159,9 +162,21 @@ def buildNext(boolean runTests) {
     sshagent(['projects-storage.eclipse.org-bot-ssh']) {
         sh "yarn electron package:preview"
     }
-    if (runTests) {
+}
+
+def testNext(String os) {
+    if (os == 'mac') {
+        sh 'echo skipped'
+    } else if (os == 'windows') {
         wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
             sh 'yarn electron test'
         }
-    } 
+    } else if (os == 'linux') {
+        wrap([$class: 'Xvnc', takeScreenshot: false, useXauthority: true]) {
+            sh 'yarn install && yarn electron test'
+            // sh 'mkdir applications/electron/dist/linux-unpacked/home && export HOME=$(pwd)/applications/electron/dist/linux-unpacked/home && echo $HOME && yarn electron test'
+        }
+    } else {
+        error("Error during testing: unsupported OS: ${os}")
+    }
 }
