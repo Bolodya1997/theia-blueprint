@@ -53,7 +53,7 @@ exports.default = async function(context) {
 
     // Only continue for macOS during CI
     if (running_ci && running_on_mac) {
-        console.log("Detected Blueprint Jenkins CI on Mac - proceed with signing");
+        console.log("Detected Jenkins CI on Mac - proceed with signing");
     } else {
         if (running_on_mac) {
             console.log("Skip Mac CI signing");
