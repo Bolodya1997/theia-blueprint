@@ -3,7 +3,7 @@
   "name": "velocity-ide",
   "description": "Velocity Web IDE",
   "productName": "Velocity IDE",
-  "version": "1.21.0",
+  "version": "1.0.0",
   "main": "scripts/velocity-ide-main.js",
   "license": "TBD",
   "author": "TBD",

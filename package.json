@@ -1,6 +1,6 @@
 {
   "private": true,
-  "version": "1.21.0",
+  "version": "1.0.0",
   "engines": {
     "yarn": "1.0.x || >=1.2.1",
     "node": ">=12.14.1 <13"
