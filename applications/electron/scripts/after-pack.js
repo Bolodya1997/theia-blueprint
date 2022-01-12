@@ -40,7 +40,7 @@ const signFile = file => {
 };
 
 exports.default = async function(context) {
-    const running_ci = process.env.BLUEPRINT_JENKINS_CI == 'true';
+    const running_ci = process.env.VELOCITY_IDE_JENKINS_CI == 'true';
     const running_on_mac = context.packager.platform.name == 'mac';
     const appPath = path.resolve(context.appOutDir, `${context.packager.appInfo.productFilename}.app`);
 
