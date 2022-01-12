@@ -1,20 +1,12 @@
 {
   "private": true,
-  "name": "theia-blueprint",
-  "description": "Eclipse Theia blueprint product",
-  "productName": "Theia Blueprint",
+  "name": "velocity-ide",
+  "description": "Velocity Web IDE",
+  "productName": "Velocity IDE",
   "version": "1.21.0",
-  "main": "scripts/theia-electron-main.js",
-  "license": "EPL-2.0 OR GPL-2.0 WITH Classpath-exception-2.0",
-  "author": "Eclipse Theia <theia-dev@eclipse.org>",
-  "homepage": "https://github.com/eclipse-theia/theia-blueprint#readme",
-  "bugs": {
-    "url": "https://github.com/eclipse-theia/theia/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/eclipse-theia/theia-blueprint.git"
-  },
+  "main": "scripts/velocity-ide-main.js",
+  "license": "TBD",
+  "author": "TBD",
   "engines": {
     "yarn": "1.0.x || >=1.2.1",
     "node": ">=12.14.1 <13"
@@ -71,9 +63,7 @@
     "@theia/variable-resolver": "1.21.0",
     "@theia/vsx-registry": "1.21.0",
     "@theia/workspace": "1.21.0",
-    "fs-extra": "^9.0.1",
-    "theia-blueprint-updater": "1.21.0",
-    "theia-blueprint-product": "1.21.0"
+    "fs-extra": "^9.0.1"
   },
   "devDependencies": {
     "@theia/cli": "1.21.0",
