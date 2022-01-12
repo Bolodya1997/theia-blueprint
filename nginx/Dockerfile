@@ -14,7 +14,7 @@ COPY ./127.0.0.1.* .
 COPY ./nginx.conf /etc/nginx/nginx.conf
 
 FROM setup as run
-WORKDIR /root/theia-blueprint/applications/electron
+WORKDIR /root/velocity-ide/applications/electron
 
 # Cleanup apt cache
 RUN apt-get clean \

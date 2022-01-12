@@ -2,7 +2,7 @@ FROM node:12.19.0-stretch as setup
 RUN apt-get update && apt-get install -y libxkbfile-dev libsecret-1-dev
 
 FROM setup as build
-WORKDIR /root/theia-blueprint
+WORKDIR /root/velocity-ide
 
 COPY . .
 RUN yarn

@@ -12,22 +12,22 @@ function getBinaryPath() {
       return path.join(
         distFolder,
         "linux-unpacked",
-        "theia-blueprint"
+        "velocity-ide"
       );
     case "win32":
       return path.join(
         distFolder,
         "win-unpacked",
-        "TheiaBlueprint.exe"
+        "VelocityIde.exe"
       );
     case "darwin":
       return path.join(
         distFolder,
         "mac",
-        "TheiaBlueprint.app",
+        "VelocityIde.app",
         "Contents",
         "MacOS",
-        "TheiaBlueprint"
+        "VelocityIde"
       );
     default:
       return undefined;
